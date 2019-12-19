@@ -1,0 +1,27 @@
+{
+    "name": "coomm/qiniucloud",
+    "description": "PhalApi 2.x 扩展类库 - 七牛云直播扩展",
+    "keywords": [
+        "phalapi", "qiniu", "cloud"
+    ],
+    "license": "GPL-3.0+",
+    "homepage": "https://www.phalapi.net/",
+    "type": "library",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "alan-arke",
+            "email": "coomm@126.com",
+            "homepage": "https://github.com/coomm",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Coomm\\Qiniucloud\\": "src"
+        }
+    } 
+}
