@@ -1,7 +1,7 @@
 <?php
 namespace Coomm\Qiniucloud;
 
-require(join(DIRECTORY_SEPARATOR, array(dirname(dirname(__FILE__)), 'lib', 'Pili.php')));
+require(join(DIRECTORY_SEPARATOR, array(dirname(dirname(__FILE__)), 'src/lib', 'Pili.php')));
 
 class Lite {
 	//accessKey
@@ -10,18 +10,16 @@ class Lite {
 	private $secretKey="";
 	//直播空间
 	private $hubname="";
-	private $hub;
-	private $hubname;
-	private $stream;
+	//hub对象
+	public $hub;
 	/**
      * SMS_Lite 构造方法初始化配置
      *
      * @param  $cofAddress string 配置文件地址
      * @param  $debug      bool   是否开启调试模式
      */
-    public function __construct($config = null, $debug = false) {
-
-        $this->debug = $debug;
+    public function __construct($config = null) {
+        
 
         if ($config === NULL) {
             //获得配置项
