@@ -24,27 +24,75 @@ $di->qiniulive = function() {
 ## 使用
 1. 创建流
 ```php
-
 // Create a new Stream
-$title           = NULL;     // optional, auto-generated as default
-$publishKey      = NULL;     // optional, auto-generated as default
-$publishSecurity = NULL;     // optional, can be "dynamic" or "static", "dynamic" as default
-
-$stream = \PhalApi\DI()->qiniulive->hub->createStream($title, $publishKey, $publishSecurity); # => Stream Object
+$stream = \PhalApi\DI()->qiniulive->hub->createStream($streamName); # => Stream Object
 ```
 
 2.获取流列表
 ```php
-$marker       = NULL;      // optional
-$limit        = NULL;      // optional
-$title_prefix = NULL;      // optional
-$status       = NULL;      // optional, "connected" only
-
-$result = \PhalApi\DI()->qiniulive->hub->listStreams($marker, $limit, $title_prefix, $status); # => Array
+$result = \PhalApi\DI()->qiniulive->hub->listStreams(); # => Array
 ```
 
-
+3.获取流
 ```php
 // Get Stream
+$streamId = $stream->id;
 $stream = \PhalApi\DI()->qiniulive->hub->getStream($streamId); # => Stream Object
 ```
+4.更新流
+```php
+// Get Stream
+$stream->disabled        = true/false; 
+$stream = $stream->update(); # => Stream Object
+```
+5.禁用流
+```php
+// Disable a Stream
+$disabledTill = time() + 10; # disabled in 10s from now
+$result = $stream->disable($disabledTill); # => NULL
+```
+
+6.启用流
+```php
+// enable a Stream
+$result = $stream->enable(); # => NULL
+```
+
+7.获取流状态
+```php
+// Get Stream status
+$result = $stream->status(); # => Array
+```
+8.删除流
+```php
+// Delete a Stream
+$result = $stream->delete(); # => NULL
+```
+
+9.获取推拉流地址
+```php
+// Generate RTMP publish URL
+$publishUrl = $stream->rtmpPublishUrl();
+
+// Generate RTMP live play URLs
+$urls = $stream->rtmpLiveUrls();
+
+// Generate HLS play URLs
+$urls = $stream->hlsLiveUrls();
+
+// Generate Http-Flv live play URLs
+$urls = $stream->httpFlvLiveUrls();
+
+// Generate HLS playback URLs
+$start     = -1;  // optional, in second, unix timestamp
+$end       = -1;  // optional, in second, unix timestamp
+$urls = $stream->hlsPlaybackUrls($start, $end);
+```
+10.保存流到文件
+```php
+// Save Stream as a file
+ $result = $stream->saveAs($filename);
+ ```
+
+
+更多请参考官方文档
